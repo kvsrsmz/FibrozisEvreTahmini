@@ -1,0 +1,5 @@
+/* Tüm sayfa kenar boşluklarını sıfırla */
+body, html {
+  margin: 0;
+  padding: 0;
+}

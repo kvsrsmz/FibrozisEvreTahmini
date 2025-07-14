@@ -74,7 +74,7 @@ const FormPage = () => {
             justifyContent: "flex-start",
           }}
         >
-          <h2 style={{ marginBottom: "20px", fontWeight: "600" }}>
+          <h2 style={{ fontSize: "20px", marginBottom: "20px", marginLeft:"30px", color: "#333" }}>
             Ultrason Görüntüsü
           </h2>
 
@@ -84,7 +84,7 @@ const FormPage = () => {
               maxWidth: "600px",
               height: "400px",
               border: "2px solid #bbb",
-              borderRadius: "0px",
+              borderRadius: "10px",
               backgroundColor: "#fff",
               display: "flex",
               alignItems: "center",
@@ -92,20 +92,23 @@ const FormPage = () => {
               boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
               overflow: "hidden",
               marginBottom: "20px",
+              marginTop: "30px",     // 👈 Aşağı kaydırır
+              marginLeft: "30px",    // 👈 Sağa kaydırır
             }}
           >
+
             {selectedImage ? (
               <img
                 src={selectedImage}
                 alt="Ultrason"
                 style={{
-                  width: "100%",
-                  height: "100%",
+                  width: "200%",
+                  height: "200%",
                   objectFit: "cover",
                 }}
               />
             ) : (
-              <span style={{ color: "#aaa", fontSize: "16px" }}>
+              <span style={{ fontSize: "20px", marginBottom: "0", color: "#333" }}>
                 Henüz görüntü yüklenmedi
               </span>
             )}
@@ -116,11 +119,13 @@ const FormPage = () => {
               onClick={() => document.getElementById("imageUpload").click()}
               style={{
                 padding: "10px 20px",
-                backgroundColor: "#4CAF50",
+                backgroundColor: "#2E7D32",
                 color: "#fff",
                 border: "none",
                 borderRadius: "6px",
-                fontSize: "20px",
+                fontSize: "16px",
+                marginTop: "30px",     // 👈 Aşağı kaydırır
+                marginRight: "90px",
                 cursor: "pointer",
               }}
             >
@@ -201,7 +206,7 @@ const FormPage = () => {
               fontSize: "16px",
               border: "none",
               borderRadius: "6px",
-              backgroundColor: "#4CAF50",
+              backgroundColor: "#2E7D32",
               color: "white",
               cursor: "pointer",
             }}
