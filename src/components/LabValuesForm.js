@@ -1,44 +1,65 @@
-import React, { useState } from 'react';
+import React from "react";
 
-function LabValuesForm() {
-  const [ast, setAst] = useState('');
-  const [alt, setAlt] = useState('');
-  const [hgb, setHgb] = useState('');
-  const [wbc, setWbc] = useState('');
-
+const LabValuesForm = () => {
   return (
-    <div>
-      <h2 style={{ marginBottom: '20px', color: '#333' }}>Kan Değerleri</h2>
+    <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
+      {/* Her biri %48 genişlikte iki sütun */}
+      <div style={{ flex: "0 0 48%" }}>
+        <label>AST (Aspartat Aminotransferaz)</label>
+        <input type="number" step="0.01" placeholder="AST değeri" />
+      </div>
 
-      <div style={{ display: 'flex', gap: '30px', flexWrap: 'wrap' }}>
-        <Field label="AST" value={ast} onChange={setAst} />
-        <Field label="ALT" value={alt} onChange={setAlt} />
-        <Field label="HGB" value={hgb} onChange={setHgb} />
-        <Field label="WBC" value={wbc} onChange={setWbc} />
+      <div style={{ flex: "0 0 48%" }}>
+        <label>ALT (Alanin Aminotransferaz)</label>
+        <input type="number" step="0.01" placeholder="ALT değeri" />
+      </div>
+
+      <div style={{ flex: "0 0 48%" }}>
+        <label>GGT (Gama Glutamil Transferaz)</label>
+        <input type="number" step="0.01" placeholder="GGT değeri" />
+      </div>
+
+      <div style={{ flex: "0 0 48%" }}>
+        <label>ALP (Alkalen Fosfataz)</label>
+        <input type="number" step="0.01" placeholder="ALP değeri" />
+      </div>
+
+      <div style={{ flex: "0 0 48%" }}>
+        <label>Total Bilirubin</label>
+        <input type="number" step="0.01" placeholder="Total Bilirubin" />
+      </div>
+
+      <div style={{ flex: "0 0 48%" }}>
+        <label>Direkt Bilirubin</label>
+        <input type="number" step="0.01" placeholder="Direkt Bilirubin" />
+      </div>
+
+      <div style={{ flex: "0 0 48%" }}>
+        <label>Albumin</label>
+        <input type="number" step="0.01" placeholder="Albumin" />
+      </div>
+
+      <div style={{ flex: "0 0 48%" }}>
+        <label>INR (International Normalized Ratio)</label>
+        <input type="number" step="0.01" placeholder="INR" />
+      </div>
+
+      <div style={{ flex: "0 0 48%" }}>
+        <label>Trombosit (Platelet) sayısı</label>
+        <input type="number" step="1" placeholder="Trombosit sayısı" />
+      </div>
+
+      <div style={{ flex: "0 0 48%" }}>
+        <label>LDH</label>
+        <input type="number" step="0.01" placeholder="LDH" />
+      </div>
+
+      <div style={{ flex: "0 0 48%" }}>
+        <label>Tam kan sayımı (CBC)</label>
+        <input type="number" step="1" placeholder="CBC" />
       </div>
     </div>
   );
-}
-
-function Field({ label, value, onChange }) {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <label style={{ marginBottom: '5px', color: '#555' }}>{label}</label>
-      <input
-        type="number"
-        step="any"
-        value={value}
-        onChange={e => onChange(e.target.value)}
-        placeholder={`${label} değeri`}
-        style={{
-          padding: '10px',
-          borderRadius: '6px',
-          border: '1px solid #ccc',
-          width: '120px'
-        }}
-      />
-    </div>
-  );
-}
+};
 
 export default LabValuesForm;

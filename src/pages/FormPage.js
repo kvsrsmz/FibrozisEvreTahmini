@@ -4,14 +4,33 @@ import PersonalInfoBar from "../components/PersonalInfoBar";
 
 const FormPage = () => {
   const navigate = useNavigate();
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedImage(URL.createObjectURL(file));
+    }
+  };
 
   // State'ler
   const [tc, setTc] = useState("");
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [age, setAge] = useState("");
+
+  // Kan değerleri için state'ler
   const [ast, setAst] = useState("");
   const [alt, setAlt] = useState("");
+  const [ggt, setGgt] = useState("");
+  const [alp, setAlp] = useState("");
+  const [totalBilirubin, setTotalBilirubin] = useState("");
+  const [directBilirubin, setDirectBilirubin] = useState("");
+  const [albumin, setAlbumin] = useState("");
+  const [inr, setInr] = useState("");
+  const [platelet, setPlatelet] = useState("");
+  const [ldh, setLdh] = useState("");
+  const [cbc, setCbc] = useState("");
 
   const handleSubmit = () => {
     const hastaVerisi = {
@@ -22,6 +41,15 @@ const FormPage = () => {
       labValues: {
         AST: ast,
         ALT: alt,
+        GGT: ggt,
+        ALP: alp,
+        TotalBilirubin: totalBilirubin,
+        DirectBilirubin: directBilirubin,
+        Albumin: albumin,
+        INR: inr,
+        Platelet: platelet,
+        LDH: ldh,
+        CBC: cbc,
       },
     };
 
@@ -32,11 +60,84 @@ const FormPage = () => {
     <div>
       <PersonalInfoBar />
 
-      <div style={{ display: "flex", height: "calc(100vh - 60px)" }}>
-        {/* Sol taraf */}
-        <div style={{ flex: 1, backgroundColor: "#f5f5f5" }}></div>
+      {/* Sayfa ana container */}
+      <div style={{ flex: 1, display: "flex" }}>
+        {/* Sol taraf: Görsel yükleme */}
+        <div
+          style={{
+            width: "50%",
+            backgroundColor: "#f5f5f5",
+            padding: "40px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+            justifyContent: "flex-start",
+          }}
+        >
+          <h2 style={{ marginBottom: "20px", fontWeight: "600" }}>
+            Ultrason Görüntüsü
+          </h2>
 
-        {/* Sağ taraf */}
+          <div
+            style={{
+              width: "100%",
+              maxWidth: "600px",
+              height: "400px",
+              border: "2px solid #bbb",
+              borderRadius: "0px",
+              backgroundColor: "#fff",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
+              overflow: "hidden",
+              marginBottom: "20px",
+            }}
+          >
+            {selectedImage ? (
+              <img
+                src={selectedImage}
+                alt="Ultrason"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                }}
+              />
+            ) : (
+              <span style={{ color: "#aaa", fontSize: "16px" }}>
+                Henüz görüntü yüklenmedi
+              </span>
+            )}
+          </div>
+
+          <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+            <button
+              onClick={() => document.getElementById("imageUpload").click()}
+              style={{
+                padding: "10px 20px",
+                backgroundColor: "#4CAF50",
+                color: "#fff",
+                border: "none",
+                borderRadius: "6px",
+                fontSize: "20px",
+                cursor: "pointer",
+              }}
+            >
+              {selectedImage ? "Görseli Değiştir" : "Görsel Yükle"}
+            </button>
+          </div>
+
+          <input
+            id="imageUpload"
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+            style={{ display: "none" }}
+          />
+        </div>
+
+        {/* Sağ taraf: Kişisel Bilgiler + Kan Değerleri */}
         <div
           style={{
             flex: 1,
@@ -66,6 +167,30 @@ const FormPage = () => {
           <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
             <Field label="AST" value={ast} onChange={setAst} type="number" />
             <Field label="ALT" value={alt} onChange={setAlt} type="number" />
+            <Field label="GGT" value={ggt} onChange={setGgt} type="number" />
+            <Field label="ALP" value={alp} onChange={setAlp} type="number" />
+            <Field
+              label="Total Bilirubin"
+              value={totalBilirubin}
+              onChange={setTotalBilirubin}
+              type="number"
+            />
+            <Field
+              label="Direkt Bilirubin"
+              value={directBilirubin}
+              onChange={setDirectBilirubin}
+              type="number"
+            />
+            <Field label="Albumin" value={albumin} onChange={setAlbumin} type="number" />
+            <Field label="INR" value={inr} onChange={setInr} type="number" />
+            <Field
+              label="Trombosit (Platelet)"
+              value={platelet}
+              onChange={setPlatelet}
+              type="number"
+            />
+            <Field label="LDH" value={ldh} onChange={setLdh} type="number" />
+            <Field label="Tam Kan Sayımı (CBC)" value={cbc} onChange={setCbc} type="number" />
           </div>
 
           <button
@@ -91,7 +216,7 @@ const FormPage = () => {
 
 // Ortak input bileşeni
 const Field = ({ label, value, onChange, type = "text" }) => (
-  <div style={{ display: "flex", flexDirection: "column" }}>
+  <div style={{ display: "flex", flexDirection: "column", minWidth: "150px" }}>
     <label style={{ marginBottom: "5px", fontWeight: "bold", fontSize: "14px" }}>{label}</label>
     <input
       type={type}
@@ -105,6 +230,7 @@ const Field = ({ label, value, onChange, type = "text" }) => (
         width: "150px",
       }}
       placeholder={`${label} giriniz`}
+      step={type === "number" ? "0.01" : undefined}
     />
   </div>
 );
