@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 const PersonalInfoBar = () => {
+  const [tc, setTc] = useState("");
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [age, setAge] = useState("");
@@ -11,10 +12,11 @@ const PersonalInfoBar = () => {
       padding: "20px",
       color: "white",
       display: "flex",
-      justifyContent: "flex-end", // sağa hizalama
+      justifyContent: "flex-end",
       alignItems: "center",
       gap: "20px"
     }}>
+      <Field label="T.C." value={tc} onChange={setTc} type="text" />
       <Field label="İsim" value={name} onChange={setName} />
       <Field label="Soyisim" value={surname} onChange={setSurname} />
       <Field label="Yaş" value={age} onChange={setAge} type="number" />
@@ -34,7 +36,10 @@ const Field = ({ label, value, onChange, type = "text" }) => (
         borderRadius: "4px",
         border: "none",
         fontSize: "14px",
-        width: "150px"
+        width: "150px",
+        appearance: type === "number" ? "textfield" : undefined,
+        MozAppearance: type === "number" ? "textfield" : undefined,
+        WebkitAppearance: type === "number" ? "none" : undefined,
       }}
       placeholder={`${label} giriniz`}
     />
