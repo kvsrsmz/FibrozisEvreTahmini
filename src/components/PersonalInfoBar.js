@@ -1,11 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
 const PersonalInfoBar = () => {
-  const [tc, setTc] = useState("");
-  const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
-  const [age, setAge] = useState("");
-
   return (
     <div style={{
       backgroundColor: "#4CAF50",
@@ -13,37 +8,24 @@ const PersonalInfoBar = () => {
       color: "white",
       display: "flex",
       justifyContent: "flex-end",
-      alignItems: "center",
-      gap: "20px"
+      alignItems: "center"
     }}>
-      <Field label="T.C." value={tc} onChange={setTc} type="text" />
-      <Field label="İsim" value={name} onChange={setName} />
-      <Field label="Soyisim" value={surname} onChange={setSurname} />
-      <Field label="Yaş" value={age} onChange={setAge} type="number" />
+      <button
+        style={{
+          backgroundColor: "#fff",
+          color: "black",
+          padding: "10px 20px",
+          borderRadius: "5px",
+          border: "none",
+          fontWeight: "bold",
+          fontSize: "14px",
+          cursor: "pointer"
+        }}
+      >
+        Giriş Yap
+      </button>
     </div>
   );
 };
-
-const Field = ({ label, value, onChange, type = "text" }) => (
-  <div style={{ display: "flex", flexDirection: "column" }}>
-    <label style={{ marginBottom: "5px", fontWeight: "bold", fontSize: "14px" }}>{label}</label>
-    <input
-      type={type}
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      style={{
-        padding: "8px",
-        borderRadius: "4px",
-        border: "none",
-        fontSize: "14px",
-        width: "150px",
-        appearance: type === "number" ? "textfield" : undefined,
-        MozAppearance: type === "number" ? "textfield" : undefined,
-        WebkitAppearance: type === "number" ? "none" : undefined,
-      }}
-      placeholder={`${label} giriniz`}
-    />
-  </div>
-);
 
 export default PersonalInfoBar;
