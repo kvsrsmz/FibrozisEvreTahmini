@@ -1,5 +1,40 @@
 # Getting Started with Create React App
 
+## Proje Hakkında
+
+Bu proje, hastanın kişisel ve laboratuvar bilgileri ile ultrason görüntüsünü bir backend API'ye göndererek yapay zeka ile fibrozis evre tahmini yapar. Sonuçlar ve raporlar frontend arayüzünde gösterilir.
+
+## Kurulum
+
+### Frontend (React)
+1. Proje klasöründe terminal açın.
+2. Gerekli paketleri yüklemek için:
+   ```bash
+   npm install
+   ```
+3. Uygulamayı başlatmak için:
+   ```bash
+   npm start
+   ```
+4. Tarayıcıda [http://localhost:3000](http://localhost:3000) adresinden erişebilirsiniz.
+
+### Backend Gereksinimleri
+Bu proje, bir backend API'ye POST isteği gönderir. Backend örnek adresi: `http://localhost:5000/predict`
+
+Backend için önerilen gereksinimler:
+- Python (ör. Flask, FastAPI veya Django Rest Framework)
+- Görüntü ve JSON verisi alabilen bir `/predict` endpoint'i
+- Yapay zeka tahmin modeli
+
+#### Örnek Flask backend kurulumu:
+```bash
+pip install flask flask-cors
+```
+
+Backend sunucusunu başlatmayı ve frontend ile aynı makinede çalıştırmayı unutmayın.
+
+> **Not:** Backend adresini değiştirmek isterseniz, frontend kodunda ilgili API URL'sini `.env` dosyasına taşıyıp oradan yönetebilirsiniz.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

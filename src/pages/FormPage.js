@@ -5,22 +5,14 @@ import "./FormPage.css";
 
 const FormPage = () => {
   const navigate = useNavigate();
-  const [selectedImage, setSelectedImage] = useState(null);
 
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setSelectedImage(URL.createObjectURL(file));
-    }
-  };
-
-  // State'ler
+  // Hasta bilgileri
   const [tc, setTc] = useState("");
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [age, setAge] = useState("");
 
-  // Kan değerleri için state'ler
+  // Kan değerleri
   const [ast, setAst] = useState("");
   const [alt, setAlt] = useState("");
   const [ggt, setGgt] = useState("");
@@ -33,7 +25,20 @@ const FormPage = () => {
   const [ldh, setLdh] = useState("");
   const [cbc, setCbc] = useState("");
 
-  const handleSubmit = () => {
+  // Görsel dosya ve önizleme url
+  const [ultrasoundFile, setUltrasoundFile] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setUltrasoundFile(file);
+      setSelectedImage(URL.createObjectURL(file));
+    }
+  };
+
+  const handleSubmit = async () => {
+    // Hasta ve laboratuvar bilgilerini bir nesnede topla
     const hastaVerisi = {
       tc,
       name,
@@ -54,7 +59,39 @@ const FormPage = () => {
       },
     };
 
-    navigate("/result", { state: hastaVerisi });
+    // FormData ile hem JSON verisi hem de dosya gönderimi için obje oluştur
+    const formData = new FormData();
+    formData.append("patient_data", JSON.stringify(hastaVerisi)); // Hasta verisini ekle
+
+    if (ultrasoundFile) {
+      formData.append("ultrasound_image", ultrasoundFile); // Ultrason dosyasını ekle
+    }
+
+    try {
+      // Backend API'ye POST isteği gönder
+      const response = await fetch("http://localhost:5000/predict", {
+        method: "POST",
+        body: formData,
+      });
+
+      // API'den hata gelirse yakala
+      if (!response.ok) throw new Error("Tahmin API çağrısı başarısız.");
+
+      // API'den gelen sonucu JSON olarak al
+      const result = await response.json();
+
+      // Tahmin sonucu ve ultrason önizlemesi ile sonuç sayfasına yönlendir
+      navigate("/result", {
+        state: {
+          ...hastaVerisi,
+          prediction: result.prediction,
+          ultrasoundImage: selectedImage,
+        },
+      });
+    } catch (error) {
+      // Hata durumunda kullanıcıya uyarı göster
+      alert("Tahmin sırasında bir hata oluştu: " + error.message);
+    }
   };
 
   return (
@@ -65,11 +102,7 @@ const FormPage = () => {
           <h2 className="formpage-title">Ultrason Görüntüsü</h2>
           <div className="formpage-image-box">
             {selectedImage ? (
-              <img
-                src={selectedImage}
-                alt="Ultrason"
-                className="formpage-ultrasound-img"
-              />
+              <img src={selectedImage} alt="Ultrason" className="formpage-ultrasound-img" />
             ) : (
               <span className="formpage-image-placeholder">Henüz görüntü yüklenmedi</span>
             )}
@@ -112,14 +145,15 @@ const FormPage = () => {
             <Field label="LDH" value={ldh} onChange={setLdh} type="number" />
             <Field label="Tam Kan Sayımı (CBC)" value={cbc} onChange={setCbc} type="number" />
           </div>
-          <button onClick={handleSubmit} className="formpage-submit-btn">Tahmin Et</button>
+          <button onClick={handleSubmit} className="formpage-submit-btn">
+            Tahmin Et
+          </button>
         </div>
       </div>
     </div>
   );
 };
 
-// Ortak input bileşeni
 const Field = ({ label, value, onChange, type = "text" }) => (
   <div style={{ display: "flex", flexDirection: "column", minWidth: "150px" }}>
     <label style={{ marginBottom: "5px", fontWeight: "bold", fontSize: "14px" }}>{label}</label>
