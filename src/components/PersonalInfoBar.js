@@ -1,10 +1,15 @@
 import React from "react";
 
 const PersonalInfoBar = () => {
+  const handleLogout = () => {
+    alert("Çıkış yapılıyor...");
+    // İstersen burada logout işlemleri veya yönlendirme yapabilirsin
+  };
+
   return (
     <div
       style={{
-        backgroundColor: "#2E7D32",
+        backgroundColor: "#2E7D32", // yeşil arka plan
         padding: "10px 30px",
         color: "white",
         display: "flex",
@@ -32,17 +37,18 @@ const PersonalInfoBar = () => {
           textAlign: "center",
           fontStyle: "italic",
           fontSize: "20px",
-          color: "#ffffff",
+          color: "#fff",
         }}
       >
         "Erken teşhis hayat kurtarır!"
       </div>
 
-      {/* Sağ: Giriş Yap Butonu */}
+      {/* Sağ: Çıkış Yap Butonu */}
       <button
+        onClick={handleLogout}
         style={{
-          backgroundColor: "#fff",
-          color: "black",
+          backgroundColor: "#cc0000", // kırmızı buton
+          color: "white",
           padding: "10px 20px",
           borderRadius: "5px",
           border: "none",
@@ -51,7 +57,7 @@ const PersonalInfoBar = () => {
           cursor: "pointer",
         }}
       >
-        Giriş Yap
+        Çıkış Yap
       </button>
     </div>
   );
