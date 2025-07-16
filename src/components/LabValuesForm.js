@@ -1,8 +1,9 @@
 import React from "react";
+import "./LabValuesForm.css";
 
 const LabValuesForm = () => {
   return (
-    <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
+    <div className="lab-values-form">
       {/* Her biri %48 genişlikte iki sütun */}
       <div style={{ flex: "0 0 48%" }}>
         <label>AST (Aspartat Aminotransferaz)</label>

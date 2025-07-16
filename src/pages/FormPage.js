@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PersonalInfoBar from "../components/PersonalInfoBar";
+import "./FormPage.css";
 
 const FormPage = () => {
   const navigate = useNavigate();
@@ -59,80 +60,28 @@ const FormPage = () => {
   return (
     <div>
       <PersonalInfoBar />
-
-      {/* Sayfa ana container */}
-      <div style={{ flex: 1, display: "flex" }}>
-        {/* Sol taraf: Görsel yükleme */}
-        <div
-          style={{
-            width: "50%",
-            backgroundColor: "#f5f5f5",
-            padding: "40px",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-            justifyContent: "flex-start",
-          }}
-        >
-          <h2 style={{ fontSize: "20px", marginBottom: "20px", marginLeft:"30px", color: "#333" }}>
-            Ultrason Görüntüsü
-          </h2>
-
-          <div
-            style={{
-              width: "100%",
-              maxWidth: "600px",
-              height: "400px",
-              border: "2px solid #bbb",
-              borderRadius: "10px",
-              backgroundColor: "#fff",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
-              overflow: "hidden",
-              marginBottom: "20px",
-              marginTop: "30px",     // 👈 Aşağı kaydırır
-              marginLeft: "30px",    // 👈 Sağa kaydırır
-            }}
-          >
-
+      <div className="formpage-container">
+        <div className="formpage-image-section">
+          <h2 className="formpage-title">Ultrason Görüntüsü</h2>
+          <div className="formpage-image-box">
             {selectedImage ? (
               <img
                 src={selectedImage}
                 alt="Ultrason"
-                style={{
-                  width: "200%",
-                  height: "200%",
-                  objectFit: "cover",
-                }}
+                className="formpage-ultrasound-img"
               />
             ) : (
-              <span style={{ fontSize: "20px", marginBottom: "0", color: "#333" }}>
-                Henüz görüntü yüklenmedi
-              </span>
+              <span className="formpage-image-placeholder">Henüz görüntü yüklenmedi</span>
             )}
           </div>
-
-          <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+          <div className="formpage-image-btn-box">
             <button
               onClick={() => document.getElementById("imageUpload").click()}
-              style={{
-                padding: "10px 20px",
-                backgroundColor: "#2E7D32",
-                color: "#fff",
-                border: "none",
-                borderRadius: "6px",
-                fontSize: "16px",
-                marginTop: "30px",     // 👈 Aşağı kaydırır
-                marginRight: "90px",
-                cursor: "pointer",
-              }}
+              className="formpage-image-btn"
             >
               {selectedImage ? "Görseli Değiştir" : "Görsel Yükle"}
             </button>
           </div>
-
           <input
             id="imageUpload"
             type="file"
@@ -141,78 +90,29 @@ const FormPage = () => {
             style={{ display: "none" }}
           />
         </div>
-
-        {/* Sağ taraf: Kişisel Bilgiler + Kan Değerleri */}
-        <div
-          style={{
-            flex: 1,
-            padding: "40px",
-            display: "flex",
-            flexDirection: "column",
-            gap: "30px",
-            alignItems: "flex-start",
-            backgroundColor: "#ffffff",
-          }}
-        >
-          {/* Başlık: Kişisel Bilgiler */}
-          <h2 style={{ fontSize: "20px", marginBottom: "0", color: "#333" }}>
-            Kişisel Bilgiler
-          </h2>
-          <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+        <div className="formpage-info-section">
+          <h2 className="formpage-title">Kişisel Bilgiler</h2>
+          <div className="formpage-fields-row">
             <Field label="T.C." value={tc} onChange={setTc} />
             <Field label="İsim" value={name} onChange={setName} />
             <Field label="Soyisim" value={surname} onChange={setSurname} />
             <Field label="Yaş" value={age} onChange={setAge} type="number" />
           </div>
-
-          {/* Başlık: Kan Değerleri */}
-          <h2 style={{ fontSize: "20px", marginBottom: "0", color: "#333" }}>
-            Kan Değerleri
-          </h2>
-          <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
+          <h2 className="formpage-title">Kan Değerleri</h2>
+          <div className="formpage-fields-row">
             <Field label="AST" value={ast} onChange={setAst} type="number" />
             <Field label="ALT" value={alt} onChange={setAlt} type="number" />
             <Field label="GGT" value={ggt} onChange={setGgt} type="number" />
             <Field label="ALP" value={alp} onChange={setAlp} type="number" />
-            <Field
-              label="Total Bilirubin"
-              value={totalBilirubin}
-              onChange={setTotalBilirubin}
-              type="number"
-            />
-            <Field
-              label="Direkt Bilirubin"
-              value={directBilirubin}
-              onChange={setDirectBilirubin}
-              type="number"
-            />
+            <Field label="Total Bilirubin" value={totalBilirubin} onChange={setTotalBilirubin} type="number" />
+            <Field label="Direkt Bilirubin" value={directBilirubin} onChange={setDirectBilirubin} type="number" />
             <Field label="Albumin" value={albumin} onChange={setAlbumin} type="number" />
             <Field label="INR" value={inr} onChange={setInr} type="number" />
-            <Field
-              label="Trombosit (Platelet)"
-              value={platelet}
-              onChange={setPlatelet}
-              type="number"
-            />
+            <Field label="Trombosit (Platelet)" value={platelet} onChange={setPlatelet} type="number" />
             <Field label="LDH" value={ldh} onChange={setLdh} type="number" />
             <Field label="Tam Kan Sayımı (CBC)" value={cbc} onChange={setCbc} type="number" />
           </div>
-
-          <button
-            onClick={handleSubmit}
-            style={{
-              marginTop: "20px",
-              padding: "12px 24px",
-              fontSize: "16px",
-              border: "none",
-              borderRadius: "6px",
-              backgroundColor: "#2E7D32",
-              color: "white",
-              cursor: "pointer",
-            }}
-          >
-            Tahmin Et
-          </button>
+          <button onClick={handleSubmit} className="formpage-submit-btn">Tahmin Et</button>
         </div>
       </div>
     </div>

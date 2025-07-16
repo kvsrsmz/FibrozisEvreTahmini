@@ -1,0 +1,15 @@
+.lab-values-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.lab-values-form > div {
+  flex: 0 0 48%;
+}
+
+@media (max-width: 900px) {
+  .lab-values-form > div {
+    flex: 0 0 100%;
+  }
+}

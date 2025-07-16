@@ -1,0 +1,142 @@
+.formpage-container {
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+}
+
+.formpage-image-section {
+  width: 50%;
+  background-color: #f5f5f5;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.formpage-title {
+  font-size: 20px;
+  margin-bottom: 20px;
+  margin-left: 30px;
+  color: #333;
+}
+
+.formpage-image-box {
+  width: 100%;
+  max-width: 600px;
+  height: 400px;
+  border: 2px solid #bbb;
+  border-radius: 10px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  overflow: hidden;
+  margin-bottom: 20px;
+  margin-top: 30px;
+  margin-left: 30px;
+}
+
+.formpage-ultrasound-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.formpage-image-placeholder {
+  font-size: 20px;
+  color: #333;
+}
+
+.formpage-image-btn-box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.formpage-image-btn {
+  padding: 10px 20px;
+  background-color: #2E7D32;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  margin-top: 30px;
+  margin-right: 90px;
+  cursor: pointer;
+}
+
+.formpage-info-section {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: flex-start;
+  background-color: #ffffff;
+}
+
+.formpage-fields-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.formpage-submit-btn {
+  margin-top: 20px;
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  background-color: #2E7D32;
+  color: white;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .formpage-container {
+    flex-direction: column;
+  }
+  .formpage-image-section {
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .formpage-info-section {
+    padding: 20px;
+  }
+  .formpage-image-box {
+    max-width: 100%;
+    height: 250px;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .formpage-title {
+    font-size: 16px;
+    margin-left: 0;
+  }
+  .formpage-image-section {
+    padding: 10px;
+  }
+  .formpage-info-section {
+    padding: 10px;
+  }
+  .formpage-image-box {
+    height: 150px;
+  }
+  .formpage-image-btn {
+    font-size: 13px;
+    margin-right: 10px;
+    padding: 8px 12px;
+  }
+  .formpage-submit-btn {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+  .formpage-fields-row {
+    gap: 5px;
+  }
+}

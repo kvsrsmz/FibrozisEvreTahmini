@@ -81,3 +81,41 @@
 .download-button:hover {
   background-color: #00337a;
 }
+
+/* Responsive düzenlemeler */
+@media (max-width: 900px) {
+  .report-container {
+    width: 95%;
+    padding: 15px;
+  }
+  .logo {
+    height: 50px;
+  }
+}
+
+@media (max-width: 600px) {
+  .report-container {
+    width: 100%;
+    padding: 5px;
+    font-size: 14px;
+  }
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .logo {
+    height: 40px;
+  }
+  .title {
+    font-size: 16px;
+    text-align: left;
+  }
+  .section table {
+    font-size: 13px;
+  }
+  .download-button {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+}
