@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PersonalInfoBar from "../components/PersonalInfoBar";
+import Chatbot from "../components/Chatbot";
 import "./FormPage.css";
 
 // TC Kimlik No doğrulama fonksiyonu
@@ -145,6 +146,9 @@ const FormPage = () => {
   return (
     <div>
       <PersonalInfoBar />
+  {/* Chatbot component */}
+      <Chatbot />
+
       <div className="formpage-container">
         <div className="formpage-image-section">
           <h2 className="formpage-title" style={titleStyle}>Ultrason Görüntüsü</h2>
